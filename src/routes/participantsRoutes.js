@@ -1,7 +1,11 @@
 import { Router } from "express"
-import { participantsCollection } from "../db/index.js"
+import { signUp } from "../controllers/participants.controller.js"
+import { signUpValidation } from "../middleware/signUpValidation.middleware.js"
+
 
 const route = Router()
+
+route.post("/sign-up",signUpValidation, signUp)
 
 
 export default route
