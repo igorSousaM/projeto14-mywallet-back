@@ -1,9 +1,8 @@
-import { json } from "body-parser"
-import express from "express"
+import express,{json} from "express"
 
 const app = express()
 app.use(cors())
-app.use(express.json())
+app.use(json())
 
 
 app.listen(5000)
