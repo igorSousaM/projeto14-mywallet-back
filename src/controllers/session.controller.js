@@ -42,3 +42,13 @@ export async function deleteUser(req,res){
         res.sendStatus(500)
     }
 }
+
+export async function getPartcipantsOnline(req,res){
+  try{
+    const participantsOnlineList = await sessionCollection.find().toArray()
+    res.status(200).send(participantsOnlineList)
+  }catch(err){
+    console.log(err)
+    res.sendStatus(500)
+  }
+}
