@@ -7,7 +7,7 @@ export default async function transactionValidation(req, res, next) {
   const token = authorization?.replace("Barear ", "");
 
   if (!token) {
-    return res.status(401).send("token errado");
+    return res.status(401).send("não tem token");
   }
 
   const { error } = transactionSchema.validate(transactionInfo, {
@@ -20,6 +20,11 @@ export default async function transactionValidation(req, res, next) {
   }
 
   const session = await sessionCollection.findOne({ token });
+
+  if(!session){
+    return res.status(400).send("token errado")
+  }
+
   const userId = session.userId;
 
   transactionInfo.userId = userId;
