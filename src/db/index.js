@@ -15,7 +15,7 @@ const transactionsColletions = db.collection("transactions")
 
 
 // participants = {id,name,email,password}
-// session = {id, token, userId}
+// session = {id, token, userId,lastStatus}
 // transactions = {id, userId, description, value, type,data}
 
 export {

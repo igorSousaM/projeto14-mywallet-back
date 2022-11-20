@@ -24,7 +24,8 @@ export async function signIn(req, res) {
 
     await sessionCollection.insertOne({
       token,
-      userId: userExist._id
+      userId: userExist._id,
+      lastStatus: Date.now()
     })
 
     res.status(201).send({token});
