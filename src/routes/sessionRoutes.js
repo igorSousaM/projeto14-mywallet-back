@@ -6,7 +6,6 @@ const sessionRouter = Router()
 sessionRouter.use(tokenValidation)
 
 sessionRouter.post("/session",updateSession)
-
 sessionRouter.delete("/session",deleteUser)
 
 export default sessionRouter

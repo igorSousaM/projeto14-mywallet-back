@@ -36,3 +36,12 @@ export async function signIn(req, res) {
   }
 }
 
+export async function getParticipants(req,res){
+  try{
+    const participantsList = await participantsCollection.find().toArray()
+    res.status(200).send(participantsList)
+  }catch(err){
+    console.log(err)
+    res.sendStatus(500)
+  }
+}

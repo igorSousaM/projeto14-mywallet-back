@@ -1,4 +1,4 @@
-export function tokenValidation(req,res) {
+export function tokenValidation(req,res,next) {
     const { authorization } = req.headers;
     const token = authorization?.replace("Bearear ", "");
   
