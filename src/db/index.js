@@ -13,6 +13,11 @@ const participantsCollection = db.collection("participants")
 const sessionCollection = db.collection("session")
 const transactionsColletions = db.collection("transactions")
 
+
+// participants = {id,name,email,password}
+// session = {id, token, userId}
+// transactions = {id, userId, description, value, type,data}
+
 export {
     participantsCollection,
     sessionCollection,
