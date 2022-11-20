@@ -1,6 +1,6 @@
 import { participantsCollection } from "../db/index.js"
 import { sessionCollection } from "../db/index.js";
-import bcrypt from 'bcrypt'
+import { v4 as uuidV4} from 'uuid';
 
 export async function signUp(req, res) {
 
@@ -17,13 +17,18 @@ export async function signUp(req, res) {
 
 export async function signIn(req, res) {
 
-  const user = res.locals.user
+  const userExist = res.locals.user
+  const token = uuidV4()
 
   try {
 
-   await sessionCollection.insertOne(user)
+    await sessionCollection.insertOne({
+      token,
+      userId: userExist._id
+    })
 
-    res.status(201).send("Cadastrado com sucesso!");
+    res.status(201).send({token});
+
   } catch (err) {
     console.log(err);
     res.sendStatus(500);

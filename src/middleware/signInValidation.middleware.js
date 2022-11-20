@@ -1,13 +1,14 @@
 import bcrypt from 'bcrypt'
 import { participantsCollection } from "../db/index.js";
 
+
 export async function signInValidation(req,res,next){
 
     const user = req.body
-
+    
     const userExist = await participantsCollection.findOne({email:user.email})
     if(!userExist){
-      return res.sendStatus(401)
+      return res.status(401).send("email não foi cadastrado")
     }
 
     const passwordOk = bcrypt.compareSync(user.password, userExist.password)
@@ -16,7 +17,7 @@ export async function signInValidation(req,res,next){
       return res.status(401).send('senha errada')
     }
     
-    res.locals.user = user
+    res.locals.user = userExist
 
     next()
 }
