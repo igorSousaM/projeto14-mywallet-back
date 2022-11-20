@@ -4,11 +4,11 @@ import { signUpValidation } from "../middleware/signUpValidation.middleware.js"
 import { signInValidation } from "../middleware/signInValidation.middleware.js"
 
 
-const participantsRoute = Router()
+const participantsRouter = Router()
 
-participantsRoute.post("/sign-up",signUpValidation, signUp)
+participantsRouter.post("/sign-up",signUpValidation, signUp)
 
-participantsRoute.post('/sign-in',signInValidation , signIn)
+participantsRouter.post('/sign-in',signInValidation , signIn)
 
 
-export default participantsRoute
+export default participantsRouter

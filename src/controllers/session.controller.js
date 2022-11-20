@@ -2,13 +2,7 @@ import { sessionCollection } from "../db/index.js";
 
 export async function updateSession(req, res) {
 
-    const { authorization } = req.headers;
-    const token = authorization?.replace("Bearear ", "");
-    console.log(token)
-  
-    if (!token) {
-      return res.status(401).send("não tem token");
-    }
+  const token = res.locals.token
 
     const session = await sessionCollection.findOne({ token });
 
@@ -30,13 +24,7 @@ export async function updateSession(req, res) {
 
 export async function deleteUser(req,res){
 
-    const { authorization } = req.headers;
-    const token = authorization?.replace("Bearear ", "");
-    console.log(token)
-  
-    if (!token) {
-      return res.status(401).send("não tem token");
-    }
+  const token = res.locals.token
 
     const session = await sessionCollection.findOne({ token });
 

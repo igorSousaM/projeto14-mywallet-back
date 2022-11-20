@@ -8,7 +8,7 @@ export async function signUp(req, res) {
 
   try {
     await participantsCollection.insertOne(user);
-    res.status(201).send("Cadastrado com sucesso!");
+    res.sendStatus(201);
   } catch (err) {
     console.log(err);
     res.sendStatus(500);

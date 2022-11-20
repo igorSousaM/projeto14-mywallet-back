@@ -19,12 +19,8 @@ export async function makeTransaction(req, res) {
 }
 
 export async function getTransactions(req, res) {
-  const { authorization } = req.headers;
-  const token = authorization?.replace("Bearer ", "");
-
-  if (!token) {
-    return res.status(401).send("nao tem token");
-  }
+  
+  const token = res.locals.token
 
   const session = await sessionCollection.findOne({ token });
 

@@ -1,11 +1,13 @@
 import { Router } from "express";
 import { getTransactions, makeTransaction } from "../controllers/transactions.controller.js";
+import { tokenValidation } from "../middleware/tokenValidation.middleware.js";
 import transactionValidation from "../middleware/transactionValidation.middleware.js";
 
-const transactionsRoute = Router()
+const transactionsRouter = Router()
+transactionsRouter.use(tokenValidation)
 
-transactionsRoute.post("/transaction",transactionValidation, makeTransaction)
-transactionsRoute.get("/transaction", getTransactions)
+transactionsRouter.post("/transaction",transactionValidation, makeTransaction)
+transactionsRouter.get("/transaction",getTransactions)
 
 
-export default transactionsRoute
+export default transactionsRouter

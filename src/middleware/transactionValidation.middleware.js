@@ -3,12 +3,8 @@ import { transactionSchema } from "../models/transactionSchema.model.js";
 
 export default async function transactionValidation(req, res, next) {
   const transactionInfo = req.body;
-  const { authorization } = req.headers;
-  const token = authorization?.replace("Barear ", "");
-
-  if (!token) {
-    return res.status(401).send("não tem token");
-  }
+  
+  const token = res.locals.token
 
   const { error } = transactionSchema.validate(transactionInfo, {
     abortEarly: false,

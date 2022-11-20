@@ -1,11 +1,11 @@
 import { Router } from "express";
-import participantsRoute from "./participantsRoutes.js";
+import participantsRouter from "./participantsRoutes.js";
 import sessionRouter from "./sessionRoutes.js";
-import transactionsRoute from "./transactionsRoutes.js";
+import transactionsRouter from "./transactionsRoutes.js";
 
 const router = Router()
-router.use(participantsRoute)
-router.use(transactionsRoute)
+router.use(participantsRouter)
+router.use(transactionsRouter)
 router.use(sessionRouter)
 
 
