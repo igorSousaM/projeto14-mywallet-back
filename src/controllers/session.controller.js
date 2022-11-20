@@ -2,17 +2,11 @@ import { sessionCollection } from "../db/index.js";
 
 export async function updateSession(req, res) {
 
-  const token = res.locals.token
-
-    const session = await sessionCollection.findOne({ token });
-
-    if(!session){
-      return res.status(400).send("token errado")
-    }
+  const user = res.locals.user
   
 
   try {
-    await sessionCollection.updateOne({ _id: session._id }, {
+    await sessionCollection.updateOne({ userId: user._id }, {
         $set: {...session, lastStatus : Date.now()}
     });
     return res.sendStatus(200);
@@ -24,17 +18,11 @@ export async function updateSession(req, res) {
 
 export async function deleteUser(req,res){
 
-  const token = res.locals.token
-
-    const session = await sessionCollection.findOne({ token });
-
-    if(!session){
-      return res.status(400).send("token errado")
-    }
+  const user = req.locals.user
 
     try{
 
-        await sessionCollection.deleteOne(session)
+        await sessionCollection.deleteOne({userId: user._id})
         res.status(200).send("usuario foi tirado da sessao")
 
     }catch(err){

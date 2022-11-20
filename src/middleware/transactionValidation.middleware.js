@@ -1,10 +1,11 @@
-import { sessionCollection } from "../db/index.js";
 import { transactionSchema } from "../models/transactionSchema.model.js";
+import dayjs from "dayjs";
 
 export default async function transactionValidation(req, res, next) {
-  const transactionInfo = req.body;
   
-  const token = res.locals.token
+  const user = res.locals.user
+  
+  const transactionInfo = req.body;
 
   const { error } = transactionSchema.validate(transactionInfo, {
     abortEarly: false,
@@ -15,15 +16,8 @@ export default async function transactionValidation(req, res, next) {
     return res.status(422).send(errors);
   }
 
-  const session = await sessionCollection.findOne({ token });
-
-  if(!session){
-    return res.status(400).send("token errado")
-  }
-
-  const userId = session.userId;
-
-  transactionInfo.userId = userId;
+  transactionInfo.userId = user._id;
+  transactionInfo.time = `${dayjs().hour()}:${dayjs().minute()}:${dayjs().second()}`
 
   res.locals.transactionInfo = transactionInfo;
 

@@ -1,16 +1,10 @@
-import { sessionCollection, transactionsColletions } from "../db/index.js";
-import dayjs from "dayjs";
+import { transactionsColletions } from "../db/index.js";
 
 export async function makeTransaction(req, res) {
   const transactionInfo = res.locals.transactionInfo;
 
-  const body = {
-    ...transactionInfo,
-    time: `${dayjs().hour()}:${dayjs().minute()}:${dayjs().second()}`,
-  };
-
   try {
-    await transactionsColletions.insertOne(body);
+    await transactionsColletions.insertOne(transactionInfo);
     res.status(201).send("transação criada");
   } catch (err) {
     console.log(err);
@@ -20,19 +14,11 @@ export async function makeTransaction(req, res) {
 
 export async function getTransactions(req, res) {
   
-  const token = res.locals.token
-
-  const session = await sessionCollection.findOne({ token });
-
-  if(!session){
-    return res.status(400).send("token errado")
-  }
-
-  const userId = session.userId
+  const user = res.locals.user
 
   try{
 
-    const transactionList = await transactionsColletions.find({userId}).toArray()
+    const transactionList = await transactionsColletions.find({userId:user._id}).toArray()
     res.status(200).send(transactionList)
 
   }catch(err){
