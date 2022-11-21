@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb";
 import { transactionsColletions } from "../db/index.js";
 
-export async function makeTransaction(req, res) {
+export async function postTransaction(req, res) {
   const transactionInfo = res.locals.transactionInfo;
 
   try {
