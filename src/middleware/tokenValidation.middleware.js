@@ -2,7 +2,7 @@ import { participantsCollection, sessionCollection } from "../db/index.js";
 
 export async function tokenValidation(req,res,next) {
     const { authorization } = req.headers;
-    const token = authorization?.replace("Bearear ", "");
+    const token = authorization?.replace("Bearer ", "");
   
     if (!token) {
       return res.status(401).send("não tem token");
