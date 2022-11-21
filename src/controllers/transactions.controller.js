@@ -20,7 +20,8 @@ export async function getTransactions(req, res) {
 
   try{
 
-    const transactionList = await transactionsColletions.find({userId:user._id}).toArray()
+    const transactionList = await transactionsColletions.find().toArray()
+    
     res.status(200).send(transactionList)
 
   }catch(err){

@@ -28,7 +28,9 @@ export async function signIn(req, res) {
       lastStatus: Date.now()
     })
 
-    res.status(201).send({token});
+    const body = { token : {token}, user: userExist}
+
+    res.status(201).send(body);
 
   } catch (err) {
     console.log(err);

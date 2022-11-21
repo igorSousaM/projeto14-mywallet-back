@@ -1,10 +1,8 @@
 import { transactionSchema } from "../models/transactionSchema.model.js";
-import dayjs from "dayjs";
 
 export default async function transactionValidation(req, res, next) {
-  
-  const user = res.locals.user
-  
+  const user = res.locals.user;
+
   const transactionInfo = req.body;
 
   const { error } = transactionSchema.validate(transactionInfo, {
@@ -17,7 +15,7 @@ export default async function transactionValidation(req, res, next) {
   }
 
   transactionInfo.userId = user._id;
-  transactionInfo.time = `${dayjs().hour()}:${dayjs().minute()}:${dayjs().second()}`
+  transactionInfo.date = `${Date().split(" ").splice(1,3).join(":")}`;
 
   res.locals.transactionInfo = transactionInfo;
 
