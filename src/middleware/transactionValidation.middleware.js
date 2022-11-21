@@ -15,7 +15,7 @@ export default async function transactionValidation(req, res, next) {
   }
 
   transactionInfo.userId = user._id;
-  transactionInfo.date = `${Date().split(" ").splice(1,3).join(":")}`;
+  transactionInfo.date = `${Date().split(" ").slice(1,3).reverse().join("/")}`;
 
   res.locals.transactionInfo = transactionInfo;
 
