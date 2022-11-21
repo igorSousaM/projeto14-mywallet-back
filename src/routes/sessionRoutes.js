@@ -3,10 +3,11 @@ import { updateSession, deleteUser, getPartcipantsOnline} from "../controllers/s
 import {tokenValidation} from "../middleware/tokenValidation.middleware.js"
 
 const sessionRouter = Router()
-sessionRouter.use(tokenValidation)
 
+sessionRouter.delete("/session/:userId",deleteUser)
+
+sessionRouter.use(tokenValidation)
 sessionRouter.post("/session",updateSession)
-sessionRouter.delete("/session",deleteUser)
 sessionRouter.get("/session", getPartcipantsOnline)
 
 export default sessionRouter
